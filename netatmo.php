@@ -7,8 +7,8 @@
 $password=$_GET['password'];
 $username=$_GET['login'];
 
-$app_id = '5515bd581b77591e2c6455ae';
-$app_secret = '7ygvuE8gOuWT3IdPktdU6svfYmb0T2k2YD72IzLF';
+$app_id = 'your app id';
+$app_secret = 'your app secret';
 
 $token_url = "https://api.netatmo.net/oauth2/token";
 $postdata = http_build_query(
