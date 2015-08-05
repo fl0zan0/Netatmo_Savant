@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="racepoint_component_profile.xsd" manufacturer="Netatmo" model="Internal" device_class="Weather_controller" minimum_component_engine_version="0" rpm_xml_version="$Revision: 4.0.1 $" unique_identifier="serial_number">
+    <notes>
+        
+hjjhgfjhgfjhgfhgfhgfhg
+
+    </notes>
+    
+    <control_interfaces preferred="ip">
+        <ip port="80" response_time_length_ms="1000" protocol="http">
+        </ip>
+    </control_interfaces>
+    
+    <media_interfaces>
+        <data name_on_component="Internet">
+            <combined_media>
+                <data_media type="ethernet"/>
+                <control port="80"/>
+            </combined_media>
+        </data>
+    </media_interfaces>
+    
+    <state_variable_list>
+        <state_variable name="Current_Temperature_C" owning_logical_component="Weather" state_center_binding="CurrentTemperatureC">C</state_variable> 
+    </state_variable_list>
+
+    <logical_component logical_component_name="Weather">
+
+        <implementation>
+        </implementation>
+
+
+
+<status_messages>
+     
+            <status_message name="temperature_interieure">
+                <constant type="hex">3C</constant>
+                <constant type="character">temperature_interieure</constant>
+                <constant type="hex">3E</constant>
+                <data type="character" terminator="3C" terminator_type="hex">
+                    <update state="temperature_interieure" type="integer"/>
+                    <update state="CurrentTemperature" type="integer"/>
+                </data>
+                <constant type="character">/temperature_interieure</constant>
+                <constant type="hex">3E</constant>
+            </status_message>
+
+
+            <status_message name="co2">
+                <constant type="hex">3C</constant>
+                <constant type="character">co2</constant>
+                <constant type="hex">3E</constant>
+                <data type="character" terminator="3C" terminator_type="hex">
+                    <update state="co2" type="integer"/>
+                </data>
+                <constant type="character">/co2</constant>
+                <constant type="hex">3E</constant>
+            </status_message>
+
+
+            <status_message name="humidite_interieure">
+                <constant type="hex">3C</constant>
+                <constant type="character">humidite_interieure</constant>
+                <constant type="hex">3E</constant>
+                <data type="character" terminator="3C" terminator_type="hex">
+                    <update state="humidite_interieure" type="integer"/>
+                </data>
+                <constant type="character">/humidite_interieure</constant>
+                <constant type="hex">3E</constant>
+            </status_message>
+
+
+            <status_message name="pression">
+                <constant type="hex">3C</constant>
+                <constant type="character">pression</constant>
+                <constant type="hex">3E</constant>
+                <data type="character" terminator="3C" terminator_type="hex">
+                    <update state="pression" type="integer"/>
+                </data>
+                <constant type="character">/pression</constant>
+                <constant type="hex">3E</constant>
+            </status_message>
+
+
+            <status_message name="niveau_sonore">
+                <constant type="hex">3C</constant>
+                <constant type="character">niveau_sonore</constant>
+                <constant type="hex">3E</constant>
+                <data type="character" terminator="3C" terminator_type="hex">
+                    <update state="niveau_sonore" type="integer"/>
+                </data>
+                <constant type="character">/niveau_sonore</constant>
+                <constant type="hex">3E</constant>
+            </status_message>
+
+</status_messages>
+
+<custom_component_actions>
+            <action name="GetWeather">
+                <command_interface interface="ip">
+                    <command response_required="no">
+                        <command_string type="character">scripts/netatmo/netatmo.php?login=</command_string>
+                        <parameter_list>    
+                        <parameter name="UID" state_variable="UID" parameter_data_type="character"/>
+                        </parameter_list>
+                    </command>
+                </command_interface>
+                <execute_on_schedule period_ms="0"/>
+                <execute_on_schedule period_ms="60000"/>
+            </action>
+        </custom_component_actions>
+              
+    </logical_component>
+</component>
