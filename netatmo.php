@@ -1,7 +1,7 @@
 <?php
 
 // Script développé par Cédric Locqueneux. http://maison-et-domotique.com
-// Synthaxe: http://www.maison-et-domotique.com/scripts/netatmo.php?login=VOTRE_EMAIL&password=MOTDEPASSE
+// Synthaxe: http://your-web-server/scripts/netatmo.php?login=VOTRE_EMAIL&password=MOTDEPASSE
 // Modifé par François LOZANO 
 
 $password=$_GET['password'];
